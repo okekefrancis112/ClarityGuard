@@ -1,0 +1,29 @@
+{
+  "name": "clarityguard",
+  "version": "0.1.0",
+  "description": "Security scanner for Clarity smart contracts on Stacks",
+  "main": "dist/index.js",
+  "bin": {
+    "clarityguard": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "test": "ts-node src/index.ts scan test/samples/"
+  },
+  "keywords": [
+    "clarity",
+    "stacks",
+    "security",
+    "smart-contract",
+    "scanner",
+    "audit"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.19.35",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.3.0"
+  }
+}

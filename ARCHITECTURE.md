@@ -31,17 +31,17 @@ Source Code (.clar)
        │
        ▼
 ┌─────────────┐
-│   Parser     │   Tokenize → Parse → Classify → AST
+│   Parser    │   Tokenize → Parse → Classify → AST
 └──────┬──────┘
        │  ClarityNode[]
        ▼
 ┌─────────────┐
-│  Analyzer    │   Run all detectors against the AST
+│  Analyzer   │   Run all detectors against the AST
 └──────┬──────┘
        │  Finding[]
        ▼
 ┌─────────────┐
-│  Reporter    │   Format as terminal output or JSON
+│  Reporter   │   Format as terminal output or JSON
 └──────┬──────┘
        │
        ▼

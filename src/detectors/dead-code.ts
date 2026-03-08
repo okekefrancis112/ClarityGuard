@@ -25,8 +25,12 @@ function getDefinedName(node: ClarityNode): string | null {
 function collectAllSymbols(nodes: ClarityNode[], exclude: ClarityNode): Set<string> {
   const symbols = new Set<string>();
 
-  walkAST(nodes, (node) => {
-    if (node === exclude) return;
+  // Filter at the top level so the entire subtree of `exclude` is skipped.
+  // (Returning early inside the walkAST callback skips the node itself but
+  // walkAST still recurses into its children, causing false "used" hits.)
+  const filtered = nodes.filter((n) => n !== exclude);
+
+  walkAST(filtered, (node) => {
     if (node.type === "symbol" && node.value) {
       symbols.add(node.value as string);
     }

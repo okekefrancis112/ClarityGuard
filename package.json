@@ -6,11 +6,23 @@
   "bin": {
     "clarityguard": "dist/index.js"
   },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
     "dev": "ts-node src/index.ts",
-    "test": "ts-node src/index.ts scan test/samples/"
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc -p tsconfig.test.json --noEmit",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "clarity",
@@ -20,10 +32,21 @@
     "scanner",
     "audit"
   ],
+  "author": "Okeke Francis Chukwudalu",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/okekefrancis112/ClarityGuard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/okekefrancis112/ClarityGuard/issues"
+  },
+  "homepage": "https://github.com/okekefrancis112/ClarityGuard#readme",
   "devDependencies": {
     "@types/node": "^20.19.35",
+    "@vitest/coverage-v8": "^4.0.18",
     "ts-node": "^10.9.0",
-    "typescript": "^5.3.0"
+    "typescript": "^5.3.0",
+    "vitest": "^4.0.18"
   }
 }

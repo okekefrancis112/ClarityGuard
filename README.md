@@ -4,6 +4,7 @@
     <strong>Static analysis security scanner for Clarity smart contracts on Stacks</strong>
   </p>
   <p align="center">
+    <a href="https://okekefrancis112.github.io/ClarityGuard/">Live Demo</a> &middot;
     <a href="#installation">Installation</a> &middot;
     <a href="#usage">Usage</a> &middot;
     <a href="#detectors">Detectors</a> &middot;
@@ -29,6 +30,7 @@ Solidity has 15+ mature security tools (Slither, Mythril, Echidna, etc.). Clarit
 - **Recursive directory scanning** for multi-contract projects
 - **Pluggable architecture** — easy to add custom detectors
 - **Actionable reports** with detailed fix recommendations
+- **[Live web playground](https://okekefrancis112.github.io/ClarityGuard/)** — try it in your browser, no install needed
 
 ## Installation
 

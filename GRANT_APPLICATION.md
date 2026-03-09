@@ -76,7 +76,10 @@ A functional prototype is already built and operational:
 - Custom Clarity S-expression parser
 - 10 vulnerability detectors
 - CLI tool with colored terminal output and JSON export
-- Tested against sample contracts (21 findings detected in a vulnerable contract, 1 advisory in a safe contract)
+- **Live web playground** — the real scanner runs in-browser, no installation required
+- Tested against sample contracts (24 findings detected in a vulnerable contract, minimal advisories in a safe contract)
+
+**Try it now:** https://okekefrancis112.github.io/ClarityGuard/
 
 GitHub repository: https://github.com/okekefrancis112/ClarityGuard
 
@@ -258,6 +261,7 @@ Summary
 
 ## Links
 
+- **Live Demo (try it now):** https://okekefrancis112.github.io/ClarityGuard/
 - Prototype Repository: https://github.com/okekefrancis112/ClarityGuard
 - npm Package: To be published as `clarityguard` (Milestone 1, Week 4)
 - Existing Clarity Security Tools (for context):

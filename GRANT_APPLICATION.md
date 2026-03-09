@@ -88,7 +88,7 @@ GitHub repository: https://github.com/okekefrancis112/ClarityGuard
 **Deliverable:** Production-quality scanner with 20 vulnerability detection rules
 
 | Week | Deliverables | Verification |
-|------|-------------|--------------|
+|------|--------------|--------------|
 | Week 1 | Harden AST parser for edge cases; implement 4 new detectors (post-condition analysis, reentrancy-adjacent patterns, flash loan vectors, token approval vulnerabilities) | Parser handles all mainnet contract syntax; 14 detectors passing tests |
 | Week 2 | Implement 4 more detectors (unsafe arithmetic, map/data-var access, uninitialized data variables, excessive permission scope) | 18 detectors passing tests |
 | Week 3 | Implement final 2 detectors (contract upgrade safety, cross-function data flow); begin mainnet contract testing | 20 detectors passing; test reports for ALEX, Zest contracts |
@@ -102,7 +102,7 @@ GitHub repository: https://github.com/okekefrancis112/ClarityGuard
 **Deliverable:** Web interface and GitHub integration for automated scanning
 
 | Week | Deliverables | Verification |
-|------|-------------|--------------|
+|------|--------------|--------------|
 | Week 5 | Web dashboard MVP (Next.js): file upload, paste code, run scan, display results | Dashboard deployed; can scan a contract via browser |
 | Week 6 | Dashboard polish: severity breakdown charts, comparison view, shareable report links | Visual report matches CLI output; shareable links working |
 | Week 7 | GitHub Action: auto-scan on PRs, block merges on critical/high, inline PR comments | Action published to GitHub Marketplace; demo PR with inline comments |
@@ -165,7 +165,7 @@ GitHub repository: https://github.com/okekefrancis112/ClarityGuard
 ## Risk Assessment & Mitigation
 
 | Risk | Likelihood | Impact | Mitigation |
-|------|-----------|--------|------------|
+|------|------------|--------|------------|
 | **Parser fails on complex mainnet contracts** | Medium | High | Prototype already parses standard Clarity syntax. Week 1 dedicated to parser hardening. Will test against 5+ real mainnet contracts to catch edge cases early. |
 | **False positive rate too high** | Medium | Medium | Tuning phase built into Milestone 1 (Week 3-4). Each detector has configurable sensitivity. Community feedback loop via GitHub Issues to identify and fix false positives. |
 | **Low developer adoption** | Medium | Medium | Distribution via npm (frictionless install). GitHub Action for automated use. Outreach via Stacks Forum, Discord, and direct partnership with protocol teams. |

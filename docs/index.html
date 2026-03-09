@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClarityGuard — Security Scanner for Clarity Smart Contracts</title>
+  <meta name="description" content="Open-source static analysis security scanner for Clarity smart contracts on Stacks. 10 vulnerability detectors, zero dependencies, MIT licensed.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container">
+      <div class="hero-badge">Open Source &middot; MIT License</div>
+      <h1 class="hero-title">
+        <span class="hero-icon">&#x1f6e1;</span> ClarityGuard
+      </h1>
+      <p class="hero-tagline">Security Scanner for Clarity Smart Contracts</p>
+      <p class="hero-sub">
+        Static analysis tool that catches vulnerabilities in
+        <a href="https://docs.stacks.co/clarity" target="_blank" rel="noopener">Clarity</a>
+        contracts before deployment. Built for the
+        <a href="https://www.stacks.co" target="_blank" rel="noopener">Stacks</a> ecosystem.
+      </p>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-value">10</span>
+          <span class="stat-label">Detectors</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">0</span>
+          <span class="stat-label">Dependencies</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">5</span>
+          <span class="stat-label">Severity Levels</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">14KB</span>
+          <span class="stat-label">Bundle Size</span>
+        </div>
+      </div>
+
+      <div class="hero-install">
+        <code id="install-cmd">npm install -g clarityguard</code>
+        <button class="copy-btn" onclick="copyInstall()" title="Copy to clipboard">&#x2398;</button>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#playground" class="btn btn-primary">Try It Live</a>
+        <a href="https://github.com/okekefrancis112/ClarityGuard" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Playground -->
+  <section id="playground" class="section">
+    <div class="container">
+      <h2 class="section-title">Live Playground</h2>
+      <p class="section-sub">Paste any Clarity contract and scan it instantly &mdash; runs the real scanner in your browser.</p>
+
+      <div class="playground-tabs">
+        <button class="tab active" data-tab="vulnerable">Vulnerable Example</button>
+        <button class="tab" data-tab="safe">Safe Example</button>
+        <button class="tab" data-tab="custom">Your Code</button>
+      </div>
+
+      <div class="playground-layout">
+        <div class="playground-editor">
+          <div class="panel-header">
+            <span class="panel-dot red"></span>
+            <span class="panel-dot yellow"></span>
+            <span class="panel-dot green"></span>
+            <span class="panel-label">contract.clar</span>
+          </div>
+          <textarea id="code-input" spellcheck="false" autocomplete="off"></textarea>
+        </div>
+
+        <div class="playground-results">
+          <div class="panel-header">
+            <span class="panel-label">Scan Results</span>
+            <button id="scan-btn" class="scan-btn" onclick="runScan()">Scan</button>
+          </div>
+          <div id="results-output" class="results-output">
+            <p class="results-placeholder">Click <strong>Scan</strong> to analyze the contract.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detectors -->
+  <section id="detectors" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Detector Catalog</h2>
+      <p class="section-sub">10 detectors covering critical vulnerabilities to code quality issues.</p>
+
+      <div class="detector-grid" id="detector-grid">
+        <!-- Populated by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture -->
+  <section id="architecture" class="section">
+    <div class="container">
+      <h2 class="section-title">How It Works</h2>
+      <div class="arch-pipeline">
+        <div class="arch-step">
+          <div class="arch-icon">&#x1f4c4;</div>
+          <div class="arch-label">.clar File</div>
+        </div>
+        <div class="arch-arrow">&rarr;</div>
+        <div class="arch-step">
+          <div class="arch-icon">&#x1f333;</div>
+          <div class="arch-label">S-Expression Parser</div>
+          <div class="arch-detail">Tokenizer &rarr; AST with line/col positions</div>
+        </div>
+        <div class="arch-arrow">&rarr;</div>
+        <div class="arch-step">
+          <div class="arch-icon">&#x1f50d;</div>
+          <div class="arch-label">10 Detectors</div>
+          <div class="arch-detail">Pattern matching on typed AST nodes</div>
+        </div>
+        <div class="arch-arrow">&rarr;</div>
+        <div class="arch-step">
+          <div class="arch-icon">&#x1f4cb;</div>
+          <div class="arch-label">Security Report</div>
+          <div class="arch-detail">Terminal (ANSI) or JSON for CI/CD</div>
+        </div>
+      </div>
+
+      <div class="arch-features">
+        <div class="arch-feature">
+          <h3>Custom Parser</h3>
+          <p>Hand-written S-expression tokenizer and recursive descent parser. Produces a fully typed AST with precise line and column positions for every node.</p>
+        </div>
+        <div class="arch-feature">
+          <h3>Pluggable Detectors</h3>
+          <p>Each detector implements a simple interface: receive the AST, return findings. Add new detectors without touching existing code.</p>
+        </div>
+        <div class="arch-feature">
+          <h3>Zero Dependencies</h3>
+          <p>No runtime dependencies. Pure TypeScript compiled to JavaScript. The entire scanner is 14KB bundled and minified.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ecosystem Gap -->
+  <section id="why" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">The Security Gap</h2>
+      <p class="section-sub">Clarity secures $545M+ in DeFi TVL. The tooling doesn't match the stakes.</p>
+
+      <div class="comparison-table-wrapper">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Capability</th>
+              <th>Clarinet</th>
+              <th>STACY</th>
+              <th class="highlight">ClarityGuard</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Vulnerability detectors</td>
+              <td>Basic type checks</td>
+              <td>6-7 patterns</td>
+              <td class="highlight">10 now, 20 planned</td>
+            </tr>
+            <tr>
+              <td>CI/CD integration</td>
+              <td>Limited</td>
+              <td>None</td>
+              <td class="highlight">Exit codes + JSON + GitHub Action</td>
+            </tr>
+            <tr>
+              <td>Custom detectors</td>
+              <td>No</td>
+              <td>No</td>
+              <td class="highlight">Pluggable architecture</td>
+            </tr>
+            <tr>
+              <td>Fix recommendations</td>
+              <td>No</td>
+              <td>Partial</td>
+              <td class="highlight">Yes, per finding</td>
+            </tr>
+            <tr>
+              <td>Zero dependencies</td>
+              <td>No</td>
+              <td>No</td>
+              <td class="highlight">Yes</td>
+            </tr>
+            <tr>
+              <td>Web playground</td>
+              <td>No</td>
+              <td>No</td>
+              <td class="highlight">You're using it now</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ecosystem-stats">
+        <div class="eco-stat">
+          <span class="eco-value">$545M+</span>
+          <span class="eco-label">sBTC TVL at risk</span>
+        </div>
+        <div class="eco-stat">
+          <span class="eco-value">2</span>
+          <span class="eco-label">Clarity security tools (before ClarityGuard)</span>
+        </div>
+        <div class="eco-stat">
+          <span class="eco-value">15+</span>
+          <span class="eco-label">Solidity security tools</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLI Demo -->
+  <section id="cli" class="section">
+    <div class="container">
+      <h2 class="section-title">CLI Usage</h2>
+      <div class="cli-demo">
+        <div class="panel-header">
+          <span class="panel-dot red"></span>
+          <span class="panel-dot yellow"></span>
+          <span class="panel-dot green"></span>
+          <span class="panel-label">Terminal</span>
+        </div>
+        <pre class="cli-output"><span class="cli-prompt">$</span> clarityguard scan contracts/token.clar
+
+<span class="cli-brand">ClarityGuard v0.1.0</span> — Clarity Smart Contract Security Scanner
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+File: contracts/token.clar
+──────────────────────────────────────────────
+
+<span class="sev-critical">[!!!]</span> #1 Unprotected state-modifying function: <span class="cli-hl">mint</span>
+     Severity: <span class="sev-critical">CRITICAL</span> | Line: 14 | Detector: unprotected-admin
+     Public function 'mint' modifies contract state but does not check
+     tx-sender or contract-caller. Any address can call this function.
+     <span class="cli-fix">Fix: Add (asserts! (is-eq tx-sender CONTRACT-OWNER) (err ERR-NOT-AUTHORIZED))</span>
+
+<span class="sev-high">[!!]</span>  #2 Unsafe unwrap-panic usage
+     Severity: <span class="sev-high">HIGH</span> | Line: 56 | Detector: unsafe-unwrap
+     'unwrap-panic' will abort the transaction with no error information.
+     <span class="cli-fix">Fix: Replace with 'unwrap!' or 'try!' for meaningful error responses.</span>
+
+<span class="sev-medium">[!]</span>   #3 Division before multiplication (precision loss)
+     Severity: <span class="sev-medium">MEDIUM</span> | Line: 40 | Detector: division-before-multiplication
+     <span class="cli-fix">Fix: Reorder to multiply before dividing.</span>
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+<span class="cli-dim">Summary</span>
+  Files scanned: 1  |  Total findings: 21
+  <span class="sev-critical">2 CRITICAL</span> | <span class="sev-high">2 High</span> | <span class="sev-medium">12 Medium</span> | <span class="sev-low">3 Low</span> | <span class="sev-info">2 Info</span>
+
+  <span class="sev-critical">Action required: Fix critical and high severity issues before deployment.</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        ClarityGuard &middot; MIT License &middot;
+        Built by <a href="https://github.com/okekefrancis112" target="_blank" rel="noopener">Okeke Francis Chukwudalu</a>
+      </p>
+      <p class="footer-links">
+        <a href="https://github.com/okekefrancis112/ClarityGuard" target="_blank" rel="noopener">GitHub</a>
+        &middot;
+        <a href="https://github.com/okekefrancis112/ClarityGuard/issues" target="_blank" rel="noopener">Issues</a>
+        &middot;
+        <a href="https://github.com/okekefrancis112/ClarityGuard/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="scanner.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
